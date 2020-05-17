@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="sk">
+	<head>
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+	
+		<title>RSS Reader</title>
+		<meta charset="utf-8">	
+		<meta name="description" content="Download RSS feed from link anh show it to reader">
+		<meta name="keywords" content="RSS, reader">
+		<meta name="author" content="Erik Spevák">
+		<link rel="stylesheet" type="text/css" href="css/dizajn.css">
+		<script src="https://cdn.jsdelivr.net/npm/p5@1.0.0/lib/p5.js"></script>
+		<script src="js/script.js"></script>
+	</head>
+	<body class="main-container">
+		<script>
+			function myFunction() {
+				var x = document.getElementById("url").value;
+				//makeCorsRequest(x);
+				tatoFunkciaFunguje(x);
+			};
+			function createCORSRequest(method, url) {
+				var xhr = new XMLHttpRequest();
+				if ("withCredentials" in xhr) {
+					// XHR for Chrome/Firefox/Opera/Safari.
+					xhr.open(method, url, true);
+				} else if (typeof XDomainRequest != "undefined") {
+					// XDomainRequest for IE.
+					xhr = new XDomainRequest();
+					xhr.open(method, url);
+				} else {
+					// CORS not supported.
+					xhr = null;
+				}
+				return xhr;
+			};
+
+				// Make the actual CORS request.
+			function makeCorsRequest(url) {
+				var xhr = createCORSRequest('GET', url);
+				if (!xhr) {
+					alert('CORS not supported');
+					return;
+				}
+
+				xhr.onload = function() {
+					var text = xhr.responseText;
+					console.log(text);	
+				};
+
+				xhr.onerror = function() {
+					alert('Woops, there was an error making the request.');
+				};
+
+				xhr.send();
+			};
+			
+				function tatoFunkciaFunguje(y){
+					corsHelper = "https://cors-anywhere.herokuapp.com/";
+					z=corsHelper+y;
+					$.ajax({
+						  url: z,
+						  cache: false,
+						  success: function(rss_data){	
+						  //nacitam itemy
+							var z = rss_data.getElementsByTagName("item");
+							//odstranim zostatok z posledneho downloadu
+							var e = document.getElementById('sem'); 
+							var dieta = e.lastElementChild;  
+							while (dieta) { 
+								e.removeChild(dieta); 
+								dieta = e.lastElementChild; 
+							} 
+							//pre kazdy nacitany prvok
+							var pole = [];
+							for (i=0; i<z.length; i++){
+								var title = z[i].getElementsByTagName("title")[0].childNodes[0].nodeValue;
+								var description = z[i].getElementsByTagName("description")[0].childNodes[0].nodeValue;
+								var date2 = z[i].getElementsByTagName("pubDate")[0].childNodes[0].nodeValue;
+								var date = new Date(date2);
+								var jeImg = z[i].getElementsByTagName("enclosure")[0];
+								if (jeImg) {
+									var img = z[i].getElementsByTagName("enclosure")[0].getAttribute("url");
+								}
+								var link = z[i].getElementsByTagName("link")[0].childNodes[0].nodeValue;
+								var text = "Title: " + title + "\nDescription: "+ description+ "\nPublished: " + date + "\n";
+								//push do pola
+								var struct= {
+									title, description, date, jeImg, img, link, text
+								}
+								pole.push(struct);
+							}
+							console.log(pole[0].date.toString("dd-mm-yyyy"));
+							//sort podla datumu
+							for (i=0; i<pole.length; i++){
+								for(j=0;j<pole.length-1; j++){
+									if(pole[j].date < pole[j+1].date){
+										var pom = pole[j];
+										pole[j] = pole[j+1];
+										pole[j+1] = pom;
+									}
+								}
+							}
+							//idem vykreslovat
+							for (i=0; i<pole.length; i++){
+								var novy = document.createElement("P");
+								//novy.setAttribute("class", "left");
+								
+								var odkaz = document.createElement("A");
+								var createAText = document.createTextNode("Viac sa dozvieš tu");
+								odkaz.appendChild(createAText);
+								odkaz.setAttribute('href', pole[i].link);
+								odkaz.setAttribute('target', "_blank");
+								
+								var obrazok = document.createElement("IMG");
+								if(pole[i].jeImg){
+									obrazok.setAttribute("src", pole[i].img);									
+								}else{
+									obrazok.setAttribute("src", "img.png");
+								}								
+								obrazok.setAttribute("height", 200);
+								obrazok.setAttribute('alt', "obrazok");
+								var blok = document.createElement("DIV");
+								blok.setAttribute("class", "blok");
+								var lavy = document.createElement("DIV");
+								lavy.setAttribute("class", "left");								
+								lavy.innerText = pole[i].text;
+								var pravy = document.createElement("DIV");
+								pravy.setAttribute("class", "right");
+								blok.appendChild(lavy);blok.appendChild(pravy);
+								
+								novy.appendChild(odkaz);
+								pravy.appendChild(obrazok);
+								document.getElementById("sem").appendChild(blok); 
+								if (screen.width<1000){
+									pravy.appendChild(novy);
+								}else{
+									lavy.appendChild(novy);
+								}
+							}
+							//console.log(rss_data);
+						  }
+						});
+				};
+		</script>
+		<header >
+			<h1 id="test" class="nazov">RSS Reader for FREE no SCAM</h1>		
+		</header>
+		<hr>
+		<main>			
+			<div id="box">
+				<h1 class="nadpis1">Zadaj link a stiahni RSS súbor</h1>
+				<input type="text" id="url" name="url" value="https://www.sme.sk/rss-title"> <br> <br> 
+			</div>
+			<div id="download" >
+				<button class="button" onclick="myFunction()"> Download </button>
+				<br><br>
+			</div>
+			<div id="sem"> 
+			</div>
+		</main>
+		<!--<footer>
+			<hr>
+			<div class="footer"> 
+				Stránka bola vytvorená ako práca na vyučovací predmet: <q>WPub</q> pre zadanie č. 1.
+			</div>
+		</footer>-->
+	</body>
+</html>

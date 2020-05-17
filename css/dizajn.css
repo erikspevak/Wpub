@@ -1,0 +1,184 @@
+
+@media screen and (min-width: 1000px) {
+	body{
+		background-image: url('https://images.pexels.com/photos/956999/milky-way-starry-sky-night-sky-star-956999.jpeg?cs=srgb&dl=blue-and-purple-cosmic-sky-956999.jpg&fm=jpg');
+	}
+	h1.nazov
+	{
+		color: yellow;
+		margin-right: 1%;
+		font-size: 80px;
+		text-shadow: 1px 1px 20px red;
+		text-align: center;
+	}
+	.nadpis1
+	{
+		color: white;
+		font-size: 50px;
+		text-align: center;
+	}
+	#url {
+	  border: 2px solid red;
+	  border-radius: 4px;
+	  width: 40%;
+	  height: 40px;
+	  text-align: center;
+	  margin-left: 30%;
+	  font-size:24px;
+	}
+
+	.main-container 
+	{
+		 min-height: 100vh; /* will cover the 100% of viewport */
+		 display: block;
+		 position: relative;
+	}
+	main{
+		 padding-bottom: 7px;
+	}
+	footer 
+	{
+		position: absolute;
+		bottom: 0;
+		width: 100%;
+		height: 7px;
+	}
+	.footer
+	{
+		text-align: center;
+	}
+	#download{
+		text-align: center;
+	}
+	button.button{
+		font-size: 50px;
+	}
+	button:hover
+	{
+		color: #3333FF;
+		background-color: orange;
+		border-radius: 5px;	
+		border-color:black;
+	}
+	button:active
+	{
+	   transform: translateY(4px);
+	}
+	.left
+	{
+		font-size: 200%;
+		color: white;
+		float: left;
+		text-align: left;
+		width: 55%;
+		padding-left: 10%;
+	}
+	.right
+	{
+		padding-right: 10%;
+		float: right;
+		width: 25%;
+	}
+	#title
+	{
+		font-weight: bold;
+	}
+	a{
+		color: yellow;
+	}
+
+}
+@media screen and (max-width: 999px) {
+  	body{
+		background-image: url('https://images.pexels.com/photos/956999/milky-way-starry-sky-night-sky-star-956999.jpeg?cs=srgb&dl=blue-and-purple-cosmic-sky-956999.jpg&fm=jpg');
+	}
+	h1.nazov
+	{
+		color: yellow;
+		margin-right: 1%;
+		font-size: 100px;
+		text-shadow: 1px 1px 20px red;
+		text-align: center;
+	}
+	.nadpis1
+	{
+		color: white;
+		font-size: 60px;
+		text-align: center;
+	}
+	#url {
+	  border: 2px solid red;
+	  border-radius: 4px;
+	  width: 50%;
+	  height: 60px;
+	  text-align: center;
+	  margin-left: 25%;
+	  font-size:30px;
+	}
+
+	.main-container 
+	{
+		 min-height: 100vh; /* will cover the 100% of viewport */
+		 display: block;
+		 position: relative;
+	}
+	main{
+		 padding-bottom: 7px;
+	}
+	footer 
+	{
+		position: absolute;
+		bottom: 0;
+		width: 100%;
+		height: 7px;
+	}
+	.footer
+	{
+		text-align: center;
+	}
+	#download{
+		text-align: center;
+	}
+	button.button{
+		font-size: 60px;
+	}
+	button:hover
+	{
+		color: #3333FF;
+		background-color: orange;
+		border-radius: 5px;	
+		border-color:black;
+	}
+	button:active
+	{
+	   transform: translateY(4px);
+	}
+	.left
+	{
+		font-size: 300%;
+		color: white;
+		float: left;
+		text-align: center;
+		width: 100%;
+		--padding-left: 10%;
+	}
+	.right
+	{
+		font-size: 300%;
+		padding-right: 15%;
+		float: right;
+		width: 70%;
+		text-align: center;
+	}
+	#title
+	{
+		font-weight: bold;
+	}
+	a{
+		color: yellow;
+	}
+	img {
+  max-width: 100%;
+  height: auto;
+}
+}

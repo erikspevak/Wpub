@@ -1,0 +1,1 @@
+start chrome.exe --args --user-data-dir="c:/chrome dev session" --disable-web-security --user-dir --allow-running-insecure-content
