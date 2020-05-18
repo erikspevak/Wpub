@@ -35,8 +35,9 @@ jobs:
     - name: try push different branch
       run: | 
          git config --global user.name 'erikspevak'
+         find -type f -name "textfile.txt" -delete
          git add .
-         git commit -am "automatic commit"
+         git commit -am "automatic commit + deleting file"
      
     - name: pushing
       uses: ad-m/github-push-action@master
