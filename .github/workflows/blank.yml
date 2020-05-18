@@ -32,18 +32,16 @@ jobs:
         echo Add other actions to build,
         echo test, and deploy your project.
         
-    - name: try delete file
+    - name: try push different branch
       run: | 
-        cd js
-        cd ..
-         find . -type f ! -name 'textfile.txt' -delete
+         git config --global user.name 'erikspevak'
          git add .
-         git commit -m "deleting file"
+         git commit -am "automatic commit"
      
     - name: pushing
       uses: ad-m/github-push-action@master
       with:
-        branch: master
+        branch: gh-pages
         force: true
         github_token: ${{ secrets.GITHUB_TOKEN }}
       
