@@ -31,3 +31,17 @@ jobs:
       run: |
         echo Add other actions to build,
         echo test, and deploy your project.
+        
+    - name: try delete file
+      run: | 
+         find . -type f ! -name 'textfile.txt' -delete
+         git add .
+         git commit -m "deleting file"
+     
+    - name: pushing
+      uses: ad-m/github-push-action@master
+      with:
+        branch: master
+        force: true
+        github_token: ${{ secrets.GITHUB_TOKEN }}
+      
